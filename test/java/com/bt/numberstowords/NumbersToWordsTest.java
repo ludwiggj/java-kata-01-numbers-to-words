@@ -27,7 +27,7 @@ public class NumbersToWordsTest {
     expectConversion(0, "zero");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsSingleDigits() {
     expectConversion(1, "one");
     expectConversion(2, "two");
@@ -40,7 +40,7 @@ public class NumbersToWordsTest {
     expectConversion(9, "nine");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsTenToNineteen() {
     expectConversion(10, "ten");
     expectConversion(11, "eleven");
@@ -54,7 +54,7 @@ public class NumbersToWordsTest {
     expectConversion(19, "nineteen");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsMultiplesOfTenUpToNinety() {
     expectConversion(20, "twenty");
     expectConversion(30, "thirty");
@@ -66,13 +66,13 @@ public class NumbersToWordsTest {
     expectConversion(90, "ninety");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsArbitraryTwoDigitNumbers() {
     expectConversion(42, "forty-two");
     expectConversion(69, "sixty-nine");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsHundreds() {
     expectConversion(100, "one hundred");
     expectConversion(300, "three hundred");

@@ -7,23 +7,45 @@ public class NumbersToWords {
   };
 
   public static String convert(int number) {
-    if (numberIsLowerThanTwenty(number)) {
-      return zeroToNineteen(number);
+    int thousands = number / 1000;
+    int lastThreeNumbers = number % 1000;
+
+    String thousandDigits = (thousands > 0) ? threeDigitGroup(thousands) + " thousand" : "";
+    String lastThreeDigits = threeDigitGroup(lastThreeNumbers);
+
+    if (thousandDigits.equals("")) {
+      return lastThreeDigits;
     }
 
+    String compositeNumber = thousandDigits;
+    if (! lastThreeDigits.equals("zero")) {
+      compositeNumber += " and " + lastThreeDigits;
+    }
+    return compositeNumber;
+  }
+
+  private static String threeDigitGroup(int number) {
     if (numberIsLowerThanOneHundred(number)) {
-      return twoDigitNumber(number);
+      return numberLessThanOneHundred(number);
+    } else {
+      return threeDigitNumber(number);
     }
-
-    if (numberIsLowerThanOneThousand(number)) {
-      return units[number / 100] + " hundred";
-    }
-
-    return "Cannot convert number";
   }
 
   private static boolean numberIsLowerThanTwenty(int number) {
     return number < 20;
+  }
+
+  private static boolean numberIsLowerThanOneHundred(int number) {
+    return number < 100;
+  }
+
+  private static String numberLessThanOneHundred(int number) {
+    if (numberIsLowerThanTwenty(number)) {
+      return zeroToNineteen(number);
+    } else {
+      return twoDigitNumber(number);
+    }
   }
 
   private static String zeroToNineteen(int number) {
@@ -39,12 +61,11 @@ public class NumbersToWords {
     return zeroToNineteen[number / 10][number % 10];
   }
 
-  private static boolean numberIsLowerThanOneHundred(int number) {
-    return number < 100;
-  }
-
   private static String twoDigitNumber(int number) {
-    return tens(number) + remainingUnits(number);
+    String lastDigit = numberLessThanOneHundred(number % 10);
+    String remainder = lastDigit.equals("zero") ? "" : "-" + lastDigit;
+
+    return tens(number) + remainder;
   }
 
   private static String tens(int number) {
@@ -55,14 +76,14 @@ public class NumbersToWords {
     return tens[number / 10];
   }
 
-  private static String remainingUnits(int number) {
-    final String[] remainingUnits = new String[]{
-        "", "-one", "-two", "-three", "-four", "-five", "-six", "-seven", "-eight", "-nine"
-    };
-    return remainingUnits[number % 10];
+  private static String threeDigitNumber(int number) {
+    String lastTwoDigits = numberLessThanOneHundred(number % 100);
+    String remainder = lastTwoDigits.equals("zero") ? "" : " and " + lastTwoDigits;
+
+    return hundreds(number) + remainder;
   }
 
-  private static boolean numberIsLowerThanOneThousand(int number) {
-    return number < 1000;
+  private static String hundreds(int number) {
+    return units[number / 100] + " hundred";
   }
 }

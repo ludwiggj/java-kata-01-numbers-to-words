@@ -78,14 +78,14 @@ public class NumbersToWordsTest {
     expectConversion(300, "three hundred");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsArbitraryThreeDigitNumbers() {
     expectConversion(123, "one hundred and twenty-three");
     expectConversion(360, "three hundred and sixty");
     expectConversion(501, "five hundred and one");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsThousands() {
     expectConversion(4000, "four thousand");
     expectConversion(9000, "nine thousand");

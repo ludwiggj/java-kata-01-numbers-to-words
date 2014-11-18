@@ -7,21 +7,33 @@ public class NumbersToWords {
   };
 
   public static String convert(int number) {
-    int thousands = number / 1000;
-    int lastThreeNumbers = number % 1000;
+    if (number > 999999) {
+      throw new IllegalArgumentException("");
+    }
 
-    String thousandDigits = (thousands > 0) ? threeDigitGroup(thousands) + " thousand" : "";
+    int lastThreeNumbers = number % 1000;
     String lastThreeDigits = threeDigitGroup(lastThreeNumbers);
+
+    String thousandDigits = thousandDigits(number);
 
     if (thousandDigits.equals("")) {
       return lastThreeDigits;
     }
 
-    String compositeNumber = thousandDigits;
-    if (! lastThreeDigits.equals("zero")) {
-      compositeNumber += " and " + lastThreeDigits;
+    if (lastThreeDigits.equals("zero")) {
+      return thousandDigits;
     }
-    return compositeNumber;
+
+    if (numberIsLowerThanOneHundred(lastThreeNumbers)) {
+      return thousandDigits + " and " + lastThreeDigits;
+    } else {
+      return thousandDigits + " " + lastThreeDigits;
+    }
+  }
+
+  private static String thousandDigits(int number) {
+    int thousands = number / 1000;
+    return (thousands > 0) ? threeDigitGroup(thousands) + " thousand" : "";
   }
 
   private static String threeDigitGroup(int number) {

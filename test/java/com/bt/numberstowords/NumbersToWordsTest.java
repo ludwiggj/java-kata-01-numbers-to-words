@@ -91,7 +91,7 @@ public class NumbersToWordsTest {
     expectConversion(9000, "nine thousand");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsArbitraryFourDigitNumbers() {
     expectConversion(1234, "one thousand two hundred and thirty-four");
     expectConversion(9600, "nine thousand six hundred");
@@ -99,7 +99,7 @@ public class NumbersToWordsTest {
     expectConversion(7008, "seven thousand and eight");
   }
 
-  @Test @Ignore
+  @Test
   public void convertsArbitraryFiveAndSixDigitNumbers() {
     expectConversion(123456, "one hundred and twenty-three thousand four hundred and fifty-six");
     expectConversion(200003, "two hundred thousand and three");
@@ -112,7 +112,7 @@ public class NumbersToWordsTest {
     expectConversion(12300, "twelve thousand three hundred");
   }
 
-  @Test(expected = IllegalArgumentException.class) @Ignore
+  @Test(expected = IllegalArgumentException.class)
   public void rejectsNumbersOver999999() {
     NumbersToWords.convert(1000000);
   }
